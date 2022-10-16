@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\insertController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::get('/', function () {
 Route::post('/postLogin', [LoginController::class, 'postLogin'])->name('postLogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/validasi', [LoginController::class, 'validasi'])->name('validasi');
+Route::post('/store', [insertController::class, 'store'])->name('store');
+
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
@@ -38,6 +41,5 @@ Route::group(['middleware' => ['auth', 'ceklevel:user,admin']], function () {
 
     Route::get('/home', [HomeController::class, 'index']);
     Route::get('/scanqr', [HomeController::class, 'scanqr']);
-    // Route::get('/rekap-laporan', [HomeController::class, 'rekapLaporan']);
     // Route::get('/create-user', [HomeController::class, 'createUser']);
 });
